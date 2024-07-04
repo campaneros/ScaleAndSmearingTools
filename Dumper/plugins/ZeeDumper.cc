@@ -83,7 +83,8 @@
 #define initFloat     { initSingleFloat, initSingleFloat, initSingleFloat }
 #define initInt       { initSingleInt, initSingleInt, initSingleInt }
 #define initIntCharge { initSingleIntCharge, initSingleIntCharge, initSingleIntCharge }
-#define PDGID 11
+//#define PDGID 11
+#define PDGID 22
 
 //using reco::TrackCollection;
 
@@ -166,6 +167,7 @@ class ZeeDumper : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
      Float_t _invMass_5x5SC = initSingleFloat;
      Float_t _invMass_ECAL_ele = initSingleFloat;
      Float_t _invMass_ECAL_pho = initSingleFloat;
+     Float_t _invMass_Gen_photo = initSingleFloat;
      Float_t _invMass_rawSC = initSingleFloat;
      Float_t _invMass_rawSC_esSC = initSingleFloat;
 
@@ -300,7 +302,6 @@ ZeeDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 
              double mass = InvMass(eleIter1->eta(),eleIter2->eta(),eleIter1->phi(),eleIter2->phi(),eleIter1->energy(),eleIter2->energy());         
              if(mass < 55 ) continue;
-             doFill = true;
              TreeSetDiElectronVar(*eleIter1, *eleIter2);	     
  
 	}// loop over eleiter2 ends here
@@ -323,6 +324,9 @@ ZeeDumper::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
                 Gen_E.push_back(part->energy());
            }
        }
+
+        doFill = true;       
+        _invMass_Gen_photo= InvMass(Gen_Eta[0],Gen_Eta[1],Gen_Phi[0],Gen_Phi[1],Gen_E[0],Gen_E[1]);
     } 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -485,6 +489,7 @@ void ZeeDumper::InitNewTree()
            _tree->Branch("Gen_Eta" , &Gen_Eta);
            _tree->Branch("Gen_Phi" , &Gen_Phi);
            _tree->Branch("Gen_E" , &Gen_E);
+           _tree->Branch("invMass_Gen_photo", &_invMass_Gen_photo, "invMass_Gen_photo/f");
         }
 
 }

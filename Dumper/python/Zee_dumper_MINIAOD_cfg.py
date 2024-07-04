@@ -20,7 +20,8 @@ process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32( 1 )
 process.source = cms.Source("PoolSource",
     skipEvents = cms.untracked.uint32(0),                       
     fileNames = cms.untracked.vstring(
-        'root://cms-xrd-global.cern.ch//store/mc/Run3Summer23MiniAODv4/DYto2L-4Jets_MLL-50_TuneCP5_13p6TeV_madgraphMLM-pythia8/MINIAODSIM/130X_mcRun3_2023_realistic_v14-v1/70002/a8a27830-f9cc-4e85-8c93-df6864ab0e32.root'
+        #'root://cms-xrd-global.cern.ch//store/mc/Run3Summer23MiniAODv4/DYto2L-4Jets_MLL-50_TuneCP5_13p6TeV_madgraphMLM-pythia8/MINIAODSIM/130X_mcRun3_2023_realistic_v14-v1/70002/a8a27830-f9cc-4e85-8c93-df6864ab0e32.root'
+        'root://cms-xrd-global.cern.ch//store/mc/RunIISummer20UL17MiniAODv2/GluGluHToGG_intqg_M125_13TeV-sherpa/MINIAODSIM/106X_mc2017_realistic_v9-v2/270000/CD609E1E-06C0-BC4E-9693-91DBE2CEB695.root'
     ),
     secondaryFileNames = cms.untracked.vstring()
 ) 
